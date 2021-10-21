@@ -1,0 +1,12 @@
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\bin\Debug\net5.0\AuthorizationMemory.deps.json
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\bin\Debug\net5.0\AuthorizationMemory.dll
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\bin\Debug\net5.0\ref\AuthorizationMemory.dll
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\bin\Debug\net5.0\AuthorizationMemory.pdb
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\obj\Debug\net5.0\AuthorizationMemory.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\obj\Debug\net5.0\AuthorizationMemory.AssemblyInfoInputs.cache
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\obj\Debug\net5.0\AuthorizationMemory.AssemblyInfo.cs
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\obj\Debug\net5.0\AuthorizationMemory.csproj.CoreCompileInputs.cache
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\obj\Debug\net5.0\AuthorizationMemory.dll
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\obj\Debug\net5.0\ref\AuthorizationMemory.dll
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\obj\Debug\net5.0\AuthorizationMemory.pdb
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\AuthorizationMemory\obj\Debug\net5.0\AuthorizationMemory.csproj.AssemblyReference.cache

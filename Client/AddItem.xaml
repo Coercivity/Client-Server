@@ -1,0 +1,55 @@
+﻿<Window x:Class="Client.AddItem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="AddItem" Height="120" Width="520"
+         MouseDown="Window_MouseDown"
+        WindowStyle="None" ResizeMode="NoResize"
+        >
+    <Grid>
+        <TextBox x:Name="NameBox" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="10,61,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <DatePicker DisplayDateStart="2021-10-15" DisplayDateEnd="2024-01-01" 
+                    FirstDayOfWeek="Wednesday" Margin="95,54,314,41"
+                    x:Name="DatePicker"
+                    ></DatePicker>
+        <TextBox x:Name="TimeStartBox" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="218,61,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="TimeEndBox" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="321,61,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="AmountBox" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="421,61,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <Label Content="Название" FontSize="9" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label Content="Дата" FontSize="9" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="110,24,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label Content="Время начала" FontSize="9" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="218,24,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label Content="Время окончания" FontSize="9" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="314,24,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Кол-во билетов" FontSize="9" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="421,24,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button Height="22"
+                    FontFamily="Helvetica"
+                    FontWeight="Light"
+                    Foreground="Black"
+                    Background="AliceBlue"
+                    Opacity="1"
+                    FontSize="17" 
+                x:Name="AddButton"
+                Click="AddButton_Click" 
+                Content="Добавить"
+                HorizontalAlignment="Left" 
+                Margin="230,90,0,0" 
+                VerticalAlignment="Top"/>
+
+
+        <Button x:Name="CloseButton"
+                    Width="19"
+                    Height="20"
+                    FontFamily="Helvetica"
+                    FontWeight="Light"
+                    Foreground="Black"
+                    Background="AliceBlue"
+                    Opacity="0.5"
+                    FontSize="17"
+                    Content="X"
+                    Click="CloseButton_Click" Margin="501,-1,0,101"
+                        />
+
+    </Grid>
+</Window>

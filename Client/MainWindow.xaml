@@ -1,0 +1,150 @@
+﻿<Window x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="380"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" ResizeMode="NoResize"
+        MouseDown="Window_MouseDown"
+        >
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Border CornerRadius="10" Grid.RowSpan="2">
+
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#7be9f6" Offset="0.0"></GradientStop>
+                        <GradientStop Color="#ff6cf8" Offset="1.0"></GradientStop>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+
+            
+            <StackPanel VerticalAlignment="Top" Margin="0,57,10,0">
+                <Image></Image>
+                <TextBlock Text="Театр Небо"
+                           FontWeight="Light"
+                           FontFamily="helvetica"
+                           FontSize="22"
+                           Foreground="White"
+                            HorizontalAlignment="Center"
+                 ></TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                <Border Width="200" 
+                        Height="2"
+                        Background="White"
+                        Opacity="0.5"/>
+
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"></StackPanel>
+            <TextBox FontFamily="Helvetica"
+                     FontWeight="Light"
+                     Text="Логин"
+                     FontSize="20"
+                     x:Name="LoginBox"
+                     HorizontalAlignment="Center"
+                     Foreground="White"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Width="236"
+                     HorizontalContentAlignment="Center"
+                     Opacity="0.5"
+                     Height="25"
+                     Margin="0,212,0,212" Grid.RowSpan="2"
+                     GotFocus="LoginBox_GotFocus"
+                     />
+
+
+
+            <StackPanel Orientation="Horizontal"></StackPanel>
+            <PasswordBox FontFamily="Helvetica"
+                     FontWeight="Light"
+                     Password="Пароль"
+           
+                     x:Name="PasswordBox"
+                     FontSize="20"
+                     HorizontalAlignment="Center"
+                     Foreground="White"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Width="236"
+                     HorizontalContentAlignment="Center"
+                     Opacity="0.5"
+                     Height="25"
+                     Margin="0,51,0,150" Grid.Row="1"
+                     
+                     GotFocus="PasswordBox_GotFocus"
+                         />
+
+            <StackPanel Grid.Row="1" Margin="0,74,0,0">
+                <Border Width="200" 
+                        Height="2"
+                        Background="White"
+                        Opacity="0.5"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Margin="-180,140,0,0">
+                <Button x:Name="LoginButton"
+                        Width="122"
+                        Height="33"
+                        FontFamily="Helvetica"
+                        FontWeight="Light"
+                        Foreground="Black"
+                        Opacity="0.5"
+                        FontSize="22"
+                        Content="Войти"
+                        Click="LoginButton_Click"
+                        >
+                </Button>
+            </StackPanel>
+
+
+
+            <StackPanel Grid.Row="1" Margin="180,140,0,0">
+                <Button x:Name="RegistrationButton"
+                        Width="122"
+                        Height="33"
+                        FontFamily="Helvetica"
+                        FontWeight="Light"
+                        Foreground="Black"
+                        Opacity="0.5"
+                        FontSize="22"
+                        Content="Регистрация"
+                        Click="RegistrationButton_Click"
+                        />
+            </StackPanel>
+
+            <!---CLoseBUtton-->
+            <StackPanel Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,0,0">
+                <Button x:Name="CloseButton"
+                    Width="19"
+                    Height="20"
+                    FontFamily="Helvetica"
+                    FontWeight="Light"
+                    Foreground="Black"
+                    Background="AliceBlue"
+                    Opacity="0.3"
+                    FontSize="17"
+                    Content="X"
+                    Click="CloseButton_Click"
+                        />
+            </StackPanel>
+
+
+        </Grid>
+    </Grid>
+</Window>

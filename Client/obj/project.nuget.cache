@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "w6Ay+CGYmAa29jNIORww+flYY2Xb2GrpW8K2jpPPklV/+XDZTQfy5rlfQt5jdTDkMCwZ1tVnFb6XPWZekpkMog==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Evgeny\\source\\repos\\Client-Server-Theatre\\Client\\Client.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Evgeny\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Evgeny\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Evgeny\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
