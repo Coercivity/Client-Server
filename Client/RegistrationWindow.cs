@@ -48,6 +48,7 @@ namespace Client
             if (response.Authorization.Status == Status.Registered)
             {
                 MainWindow w = new MainWindow();
+                MessageBox.Show("Вы успешно зарегистрировались");
                 w.Show();
                 Close();
             }
@@ -60,7 +61,6 @@ namespace Client
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
-
         }
         
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -69,7 +69,6 @@ namespace Client
             Close();
             mainWindow.Show();
         }
-
 
         private void RLoginBox_OnFocus(object sender, RoutedEventArgs e)
         {

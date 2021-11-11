@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace Client_Server_Theatre
+namespace Server
 {
     public partial class Ticket
     {
@@ -12,7 +12,6 @@ namespace Client_Server_Theatre
         public int Id { get; set; }
         public int? Client { get; set; }
         public int? Play { get; set; }
-
         public virtual Spectator ClientNavigation { get; set; }
         public virtual Play PlayNavigation { get; set; }
     }

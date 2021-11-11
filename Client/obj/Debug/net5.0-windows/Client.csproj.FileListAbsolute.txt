@@ -6,11 +6,9 @@ C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\bin\Debug\net5.0-windo
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\bin\Debug\net5.0-windows\ref\Client.dll
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\bin\Debug\net5.0-windows\Client.pdb
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\Client.csproj.AssemblyReference.cache
-C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\MainWindow.g.cs
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\App.g.cs
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\Client_MarkupCompile.cache
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\Client_MarkupCompile.lref
-C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\MainWindow.baml
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\Client.g.resources
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\Client.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\Client.AssemblyInfoInputs.cache
@@ -31,3 +29,5 @@ C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windo
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\AdminPanel.baml
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\AddItem.g.cs
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\AddItem.baml
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\MainWindow.g.cs
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client\obj\Debug\net5.0-windows\MainWindow.baml

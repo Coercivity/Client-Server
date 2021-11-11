@@ -65,3 +65,5 @@ C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client-Server-Theatre\obj\Deb
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client-Server-Theatre\obj\Debug\net5.0\Server.genruntimeconfig.cache
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client-Server-Theatre\bin\Debug\net5.0\Memory.dll
 C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client-Server-Theatre\bin\Debug\net5.0\Memory.pdb
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client-Server-Theatre\bin\Debug\net5.0\Npgsql.dll
+C:\Users\Evgeny\source\repos\Client-Server-Theatre\Client-Server-Theatre\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

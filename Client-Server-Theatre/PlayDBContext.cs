@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace Client_Server_Theatre
+namespace Server
 {
     public partial class PlayDBContext : DbContext
     {
@@ -26,7 +26,7 @@ namespace Client_Server_Theatre
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-            {
+            { 
                 optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=PlayDB;Trusted_Connection=True;");
             }
         }

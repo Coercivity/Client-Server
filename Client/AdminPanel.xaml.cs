@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace Client
 {
-    /// <summary>
-    /// Логика взаимодействия для AdminPanel.xaml
-    /// </summary>
     public partial class AdminPanel : Window
     {
         public AdminPanel()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace Client_Server_Theatre
+namespace Server
 {
     public partial class Play
     {
@@ -11,7 +11,6 @@ namespace Client_Server_Theatre
         {
             Tickets = new HashSet<Ticket>();
         }
-
         public string PlayName { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }

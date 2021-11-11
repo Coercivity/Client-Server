@@ -1,28 +1,19 @@
 ﻿using Memory;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Text.Json;
 
 namespace Client
 {
     public partial class TheatreWindow : Window
     {
-
-
-
         int Iter = 0;
+
         int TicketIter = 0;
+
+        int PageIterator = 0;
 
         AdminPanel adminPanel;
 
@@ -32,17 +23,11 @@ namespace Client
         public static string address = "127.0.0.1";
         private List<PlayMemory> Plays { get; set; }
         private List<TicketMemory> Tickets { get; set; }
-
-        
-
-        List<RoutedEventHandler> routedEventHandler;
         public TheatreWindow(IMemory memory)
         {
-            routedEventHandler = new List<RoutedEventHandler>();
             InitializeComponent();
             if (memory.Authorization.Status == Status.Admin)
-            {
-                
+            {       
                 AdminPanel.Visibility = Visibility.Visible;
             }
             else
@@ -50,15 +35,19 @@ namespace Client
                 UserName.Content = "Добро пожаловать " + memory.Account.Nickname + " !";
             }
             DerivedMemory = memory;
-            NextButton.Visibility = Visibility.Hidden;
 
-            foreach (Canvas canvas in Canv.Children)
-            {
-                canvas.Visibility = Visibility.Hidden;
-            }
+
+            HideCanvas();
             NextViewButton.Visibility = Visibility.Hidden;
+            NextButton.Visibility = Visibility.Hidden;
         }
 
+
+        private void HideCanvas()
+        {
+            foreach (Canvas canvas in Canv.Children)
+                canvas.Visibility = Visibility.Hidden;
+        }
 
         private void AdminPanel_Click(object sender, RoutedEventArgs e)
         {
@@ -70,11 +59,8 @@ namespace Client
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            HideCanvas();
 
-            foreach (Canvas canvas in Canv.Children)
-            {
-                canvas.Visibility = Visibility.Hidden;
-            }
             if (SearchBox.Text == "")
                 return;
             
@@ -95,22 +81,18 @@ namespace Client
             }
 
             if(Plays.Count > Canv.Children.Count)
-            {
                 NextButton.Visibility = Visibility.Hidden;
-            }
+            PageIterator = 0;
             Iter = 0;
             if (Plays.Count != 0)
-                 Display(ref Iter, Plays);
-
+                DisplayPlays(ref Iter, Plays);
         }
 
 
-        private void Display(ref int Iter, List<PlayMemory> plays)
+        private void DisplayPlays(ref int Iter, List<PlayMemory> plays)
         {
-            foreach (Canvas canvas in Canv.Children)
-            {
-                canvas.Visibility = Visibility.Hidden;
-            }
+            HideCanvas();
+
             NextViewButton.Visibility = Visibility.Hidden;
             foreach (Canvas canvas in Canv.Children)
             {
@@ -134,21 +116,14 @@ namespace Client
                     lablel_3.Content = "Начало: " + plays[Iter].StartTime;
                     lablel_4.Content = "Конец: " + plays[Iter].EndTime;
                     lablel_5.Content = "Билеты: " + plays[Iter].TicketAmount;
-
+                    button.Click -= ActionButton;
                     button.Click += ActionButton;
                     Iter++;
+  
+                }
 
-                    
-                }
-                if(Iter >= Canv.Children.Count)
-                {
-                    NextButton.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    NextButton.Visibility = Visibility.Hidden;
-                }
             }
+            NextButton.Visibility = (Iter >= Canv.Children.Count) ? Visibility.Visible : Visibility.Hidden;
         }
 
         public void ActionButton(object sender, RoutedEventArgs e)
@@ -171,28 +146,28 @@ namespace Client
             switch (button.Name)    
             {
                 case "FirstButton":
-                    memory.Play = Plays[0];
+                    memory.Play = Plays[0 + PageIterator];
                     break;
                 case "SecondButton":
-                    memory.Play = Plays[1];
+                    memory.Play = Plays[1 + PageIterator];
                     break;
                 case "ThirdButton":
-                    memory.Play = Plays[2];
+                    memory.Play = Plays[2 + PageIterator];
                     break;
                 case "ForthButton":
-                    memory.Play = Plays[3];
+                    memory.Play = Plays[3 + PageIterator];
                     break;
                 case "FifthButton":
-                    memory.Play = Plays[4];
+                    memory.Play = Plays[4 + PageIterator];
                     break;
                 case "SixthButton":
-                    memory.Play = Plays[5];
+                    memory.Play = Plays[5 + PageIterator];
                     break;
                 case "SeventhButton":
-                    memory.Play = Plays[6];
+                    memory.Play = Plays[6 + PageIterator];
                     break;
                 case "EigthButton":
-                    memory.Play = Plays[7];
+                    memory.Play = Plays[7 + PageIterator];
                     break;
                 default:
                     break;
@@ -202,6 +177,7 @@ namespace Client
             //not implemented price/place
             int price = 500;
             int place = 5;
+
             memory.Ticket = new TicketMemory(price, place, memory.Play.PlayName, memory.Account.Nickname, memory.Play.StartDate, memory.Play.StartTime, 0);
 
             string message = JsonSerializer.Serialize(memory);
@@ -211,6 +187,8 @@ namespace Client
 
             if(response.State == State.SuccessfulTicketBuy)
             {
+                SearchButton_Click(sender, e);
+                PageIterator = 0;
                 MessageBox.Show("Успешное бронирование билета");
             }
             else
@@ -242,12 +220,14 @@ namespace Client
 
             if(response.State == State.GetTicketsFail)
             {
+                HideCanvas();
                 MessageBox.Show("У вас нет ни одного купленного билета!");
                 return;
             }
+            PageIterator = 0;
             TicketIter = 0;
             Tickets = response.TicketList;
-                 DisplayTickets(ref TicketIter, Tickets);
+            DisplayTickets(ref TicketIter, Tickets);
 
 
         }
@@ -255,21 +235,19 @@ namespace Client
         private void DisplayTickets(ref int TicketIter, List<TicketMemory> tickets)
         {
             NextButton.Visibility = Visibility.Hidden;
-            foreach (Canvas canvas in Canv.Children)
-            {
-                canvas.Visibility = Visibility.Hidden;
-            }
+            HideCanvas();
             
             foreach (Canvas canvas in Canv.Children)
             {
-
                 if (tickets.Count > TicketIter)
                 {
                     canvas.Visibility = Visibility.Visible;
+
                     Button button = (Button)canvas.Children[0];
                     Button button_2 = (Button)canvas.Children[1];
                     button.Visibility = Visibility.Hidden;
                     button_2.Visibility = Visibility.Visible;
+
                     Label lablel_1 = (Label)canvas.Children[2];
                     Label lablel_2 = (Label)canvas.Children[3];
                     Label lablel_3 = (Label)canvas.Children[4];
@@ -284,22 +262,15 @@ namespace Client
                     lablel_5.Content = "Место: " + tickets[TicketIter].Place;
 
                     TicketIter++;
-
-                    button_2.Click += TicketReturn;
+                    button_2.Click -= ReturnTicket;
+                    button_2.Click += ReturnTicket;
                 }
 
             }
-            if (TicketIter >= Canv.Children.Count)
-            {
-                NextViewButton.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                NextViewButton.Visibility = Visibility.Hidden;
-            }
+            NextViewButton.Visibility = (Iter >= Canv.Children.Count) ? Visibility.Visible : Visibility.Hidden;
         }
-        
-        private void TicketReturn(object sender, RoutedEventArgs e)
+
+        private void ReturnTicket(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
             if (MessageBox.Show("Вы действительно хотите вернуть билет",
@@ -313,28 +284,28 @@ namespace Client
             switch (button.Name)
             {
                 case "CFirstButton":
-                    memory.Query = Tickets[0].Id.ToString();
+                    memory.Query = Tickets[0 + PageIterator].Id.ToString();
                     break;
                 case "CSecondButton":
-                    memory.Query = Tickets[1].Id.ToString();
+                    memory.Query = Tickets[1 + PageIterator].Id.ToString();
                     break;
                 case "CThirdButton":
-                    memory.Query = Tickets[2].Id.ToString();
+                    memory.Query = Tickets[2 + PageIterator].Id.ToString();
                     break;
                 case "CForthButton":
-                    memory.Query = Tickets[3].Id.ToString();
+                    memory.Query = Tickets[3 + PageIterator].Id.ToString();
                     break;
                 case "CFifthButton":
-                    memory.Query = Tickets[4].Id.ToString();
+                    memory.Query = Tickets[4 + PageIterator].Id.ToString();
                     break;
                 case "CSixthButton":
-                    memory.Query = Tickets[5].Id.ToString();
+                    memory.Query = Tickets[5 + PageIterator].Id.ToString();
                     break;
                 case "CSeventhButton":
-                    memory.Query = Tickets[6].Id.ToString();
+                    memory.Query = Tickets[6 + PageIterator].Id.ToString();
                     break;
                 case "CEigthButton":
-                    memory.Query = Tickets[7].Id.ToString();
+                    memory.Query = Tickets[7 + PageIterator].Id.ToString();
                     break;
                 default:
                     break;
@@ -345,25 +316,34 @@ namespace Client
             string serverResponse = connection.OutMessage.ToString();
             var response = JsonSerializer.Deserialize<IMemory>(serverResponse);
 
+
+
             if (response.State == State.SuccessfulTicketReturn)
             {
                 MessageBox.Show("Успешный возврат билета");
+                DisplayTicketsButton_Click(sender, e);
+                PageIterator = 0;
             }
             else
-            {
                 MessageBox.Show("Возвратить билет не удалось");
-            }
+            
         }
 
         private void NextViewButton_Click(object sender, RoutedEventArgs e)
         {
             if (Tickets != null && TicketIter < Tickets.Count)
+            {
+                PageIterator += 8;
                 DisplayTickets(ref TicketIter, Tickets);
+            }
         }
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if(Plays != null && Iter < Plays.Count)
-            Display(ref Iter, Plays);
+            if (Plays != null && Iter < Plays.Count)
+            {
+                PageIterator += 8;
+                DisplayPlays(ref Iter, Plays);
+            }
         }
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)

@@ -7,7 +7,7 @@ using System.Linq;
 using Memory;
 using System.Collections.Generic;
 
-namespace Client_Server_Theatre
+namespace Server
 {
 
     public class Server
@@ -63,7 +63,6 @@ namespace Client_Server_Theatre
                                 Ticket ticket = db.Tickets.Where(p => p.Id.Equals(Int32.Parse(clientResponse.Query))).FirstOrDefault();
                                 Play play = db.Plays.Where(p => p.Id.Equals(ticket.Play)).FirstOrDefault();
 
-
                                 if (ticket != null)
                                 {
                                     play.TicketAmount++;
@@ -104,10 +103,8 @@ namespace Client_Server_Theatre
                                     db.SaveChanges();
 
                                     clientResponse.State = State.SuccessfulTicketBuy;
-                                    
                                    
                                 }
-
 
                                 messageToClient = JsonSerializer.Serialize<IMemory>(clientResponse);
                                 data = Encoding.Unicode.GetBytes(messageToClient);
@@ -248,45 +245,52 @@ namespace Client_Server_Theatre
                                     using (PlayDBContext db = new PlayDBContext())
                                     {
 
-                                        var query = db.Accounts.Where(a => a.Nickname.Equals(clientResponse.Authorization.Login) && 
+                                        var query = db.Accounts.Where(a => a.Nickname.Equals(clientResponse.Authorization.Login) &&
                                         a.Parol.Equals(clientResponse.Authorization.Password)).FirstOrDefault();
-                                        
-                                        if (db.Administrators.Where(a => a.Id.Equals(query.Id)).FirstOrDefault() != null) 
+                                        if (query != null)
                                         {
-                                            clientResponse.Authorization.Status = Status.Admin;
-                                            var playsList = db.Plays.ToList();
-                                            List<PlayMemory> playMemories = new List<PlayMemory>();
-                                            foreach (var play in playsList)
+
+                                            if (db.Administrators.Where(a => a.Id.Equals(query.Id)).FirstOrDefault() != null)
                                             {
-                                                playMemories.Add(new PlayMemory(play.PlayName, play.StartDate,
-                                                    play.StartTime, play.EndTime, play.TicketAmount, play.Id));
+                                                clientResponse.Authorization.Status = Status.Admin;
+                                                var playsList = db.Plays.ToList();
+                                                List<PlayMemory> playMemories = new List<PlayMemory>();
+                                                foreach (var play in playsList)
+                                                {
+                                                    playMemories.Add(new PlayMemory(play.PlayName, play.StartDate,
+                                                        play.StartTime, play.EndTime, play.TicketAmount, play.Id));
+                                                }
+                                                clientResponse.PlaysList = playMemories;
                                             }
-                                            clientResponse.PlaysList = playMemories;
+                                            else if (query != null)
+                                            {
+                                                clientResponse.Authorization.Status = Status.Authorized;
+                                                clientResponse.Account = new AccountMemory(query.Id, query.Nickname, query.Email, query.Parol);
+                                            }
+                                            else
+                                                clientResponse.Authorization.Status = Status.AuthorizationFail;
+
+                                            //var adminQuery = db.Accounts.Join(db.Administrators, u => u.Id, c => c.Id, (u, c) => new
+                                            //{
+                                            //    NickName = u.Nickname,
+                                            //    Pass = u.Parol,
+                                            //    Email = u.Email
+                                            //}).Where(u => u.NickName.Equals(clientResponse.Authorization.Login) 
+                                            //               && u.Pass.Equals(clientResponse.Authorization.Password));
+
+
                                         }
-                                        else if(query != null)
-                                        {
-                                            clientResponse.Authorization.Status = Status.Authorized;
-                                            clientResponse.Account = new AccountMemory(query.Id, query.Nickname, query.Email, query.Parol);
-                                        }
+
                                         else
+                                        {
                                             clientResponse.Authorization.Status = Status.AuthorizationFail;
-
-                                        //var adminQuery = db.Accounts.Join(db.Administrators, u => u.Id, c => c.Id, (u, c) => new
-                                        //{
-                                        //    NickName = u.Nickname,
-                                        //    Pass = u.Parol,
-                                        //    Email = u.Email
-                                        //}).Where(u => u.NickName.Equals(clientResponse.Authorization.Login) 
-                                        //               && u.Pass.Equals(clientResponse.Authorization.Password));
-
+                                        }
+                                        messageToClient = JsonSerializer.Serialize<IMemory>(clientResponse);
+                                        data = Encoding.Unicode.GetBytes(messageToClient);
+                                        handler.Send(data);
                                         
                                     }
-                                    messageToClient = JsonSerializer.Serialize<IMemory>(clientResponse);
-                                    data = Encoding.Unicode.GetBytes(messageToClient);
-                                    handler.Send(data);
                                     break;
-
-
                                 case Status.Registration:
                                     Console.WriteLine(DateTime.Now.ToShortTimeString() + ": " + clientResponse.Authorization.Status);
                                     Console.WriteLine(logJson);
@@ -328,8 +332,7 @@ namespace Client_Server_Theatre
                             default:
                                 break;
                         }
-
-                   
+            
                     // закрываем сокет
                     handler.Shutdown(SocketShutdown.Both);
                     handler.Close();
@@ -340,9 +343,6 @@ namespace Client_Server_Theatre
                 Console.WriteLine(ex.Message);
             }
         }
-
-
-
     }
 }
 
