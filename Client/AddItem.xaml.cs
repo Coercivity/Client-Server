@@ -48,7 +48,7 @@ namespace Client
             memory.State = State.InputState;
             string message = JsonSerializer.Serialize(memory);
 
-            Connection connection = new Connection(message, TheatreWindow.address, TheatreWindow.port);
+            Connection connection = new Connection(message, IMemory.IP, IMemory.port);
 
             string serverResponse = connection.OutMessage.ToString();
             MessageBox.Show(serverResponse);

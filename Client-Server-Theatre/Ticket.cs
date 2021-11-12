@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-#nullable disable
+﻿#nullable disable
 
 namespace Server
 {
@@ -12,6 +9,7 @@ namespace Server
         public int Id { get; set; }
         public int? Client { get; set; }
         public int? Play { get; set; }
+
         public virtual Spectator ClientNavigation { get; set; }
         public virtual Play PlayNavigation { get; set; }
     }

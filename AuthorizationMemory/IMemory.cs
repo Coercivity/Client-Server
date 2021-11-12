@@ -16,7 +16,12 @@ namespace Memory
         public List<TicketMemory> TicketList { get; set; }
         public State State { get; set; }
         public string Query { get; set; }
-        
+
+        //Порт для сокета
+        public static int port = 8005; 
+        //IP для сокета
+        public static string IP = "127.0.0.1";
+
     }
 
     public enum State
@@ -32,7 +37,6 @@ namespace Memory
         GetTicketsFail,
         ReturnTicket,
         SuccessfulTicketReturn
-
 
     }
 

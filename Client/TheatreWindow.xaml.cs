@@ -16,11 +16,7 @@ namespace Client
         int PageIterator = 0;
 
         AdminPanel adminPanel;
-
-        public static int port = 8005;
         public IMemory DerivedMemory { get; set; }
-
-        public static string address = "127.0.0.1";
         private List<PlayMemory> Plays { get; set; }
         private List<TicketMemory> Tickets { get; set; }
         public TheatreWindow(IMemory memory)
@@ -70,7 +66,7 @@ namespace Client
             memory.Query = SearchBox.Text;
             memory.State = State.PlayState;
             string message = JsonSerializer.Serialize<IMemory>(memory);
-            Connection connection = new Connection(message, address, port);
+            Connection connection = new Connection(message, IMemory.IP, IMemory.port);
 
             string serverResponse = connection.OutMessage.ToString();
             Plays = JsonSerializer.Deserialize<List<PlayMemory>>(serverResponse);
@@ -181,7 +177,7 @@ namespace Client
             memory.Ticket = new TicketMemory(price, place, memory.Play.PlayName, memory.Account.Nickname, memory.Play.StartDate, memory.Play.StartTime, 0);
 
             string message = JsonSerializer.Serialize(memory);
-            Connection connection = new Connection(message, address, port);
+            Connection connection = new Connection(message, IMemory.IP, IMemory.port);
             string serverResponse = connection.OutMessage.ToString();
             var response = JsonSerializer.Deserialize<IMemory>(serverResponse);
 
@@ -213,7 +209,7 @@ namespace Client
             memory.State = State.GetTickets;
             string message = JsonSerializer.Serialize<IMemory>(memory);
 
-            Connection connection = new Connection(message, address, port);
+            Connection connection = new Connection(message, IMemory.IP, IMemory.port);
 
             string serverResponse = connection.OutMessage.ToString();
             var response = JsonSerializer.Deserialize<IMemory>(serverResponse);
@@ -312,7 +308,7 @@ namespace Client
             }
             memory.State = State.ReturnTicket;
             string message = JsonSerializer.Serialize(memory);
-            Connection connection = new Connection(message, address, port);
+            Connection connection = new Connection(message, IMemory.IP, IMemory.port);
             string serverResponse = connection.OutMessage.ToString();
             var response = JsonSerializer.Deserialize<IMemory>(serverResponse);
 

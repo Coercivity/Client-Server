@@ -12,8 +12,6 @@ namespace Client
     /// </summary>
     public partial class RegistrationWindow : Window
     {
-        int port = 8005;
-        string address = "127.0.0.1";
         public RegistrationWindow()
         {
             InitializeComponent();
@@ -39,7 +37,7 @@ namespace Client
             memory.State = State.AuthorizationState;
             string message = JsonSerializer.Serialize(memory);
 
-            Connection connection = new Connection(message, address, port);
+            Connection connection = new Connection(message, IMemory.IP, IMemory.port);
 
             string serverResponse = connection.OutMessage.ToString();
             var response = JsonSerializer.Deserialize<IMemory>(serverResponse);

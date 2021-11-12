@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
@@ -26,8 +24,8 @@ namespace Server
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-            { 
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=PlayDB;Trusted_Connection=True;");
+            {
+                optionsBuilder.UseSqlServer("Server=theatredb.c78czuhpde8z.eu-central-1.rds.amazonaws.com;Database=PlayDB;User Id=admin;Password=admin12345;");
             }
         }
 
@@ -39,10 +37,10 @@ namespace Server
             {
                 entity.ToTable("Account");
 
-                entity.HasIndex(e => e.Email, "UQ__Account__A9D10534AE756BD2")
+                entity.HasIndex(e => e.Email, "UQ__Account__A9D10534327C0815")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Nickname, "UQ__Account__CC6CD17EC2222FF3")
+                entity.HasIndex(e => e.Nickname, "UQ__Account__CC6CD17E79DEB07D")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -72,7 +70,7 @@ namespace Server
                     .WithOne(p => p.Administrator)
                     .HasForeignKey<Administrator>(d => d.Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Administrato__ID__44FF419A");
+                    .HasConstraintName("FK__Administrato__ID__4AB81AF0");
             });
 
             modelBuilder.Entity<Play>(entity =>
@@ -118,7 +116,7 @@ namespace Server
                     .WithOne(p => p.Spectator)
                     .HasForeignKey<Spectator>(d => d.Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Spectator__ID__3E52440B");
+                    .HasConstraintName("FK__Spectator__ID__4BAC3F29");
             });
 
             modelBuilder.Entity<Ticket>(entity =>
@@ -132,12 +130,12 @@ namespace Server
                 entity.HasOne(d => d.ClientNavigation)
                     .WithMany(p => p.Tickets)
                     .HasForeignKey(d => d.Client)
-                    .HasConstraintName("FK__Ticket__Client__4222D4EF");
+                    .HasConstraintName("FK__Ticket__Client__4CA06362");
 
                 entity.HasOne(d => d.PlayNavigation)
                     .WithMany(p => p.Tickets)
                     .HasForeignKey(d => d.Play)
-                    .HasConstraintName("FK__Ticket__Play__412EB0B6");
+                    .HasConstraintName("FK__Ticket__Play__4D94879B");
             });
 
             OnModelCreatingPartial(modelBuilder);

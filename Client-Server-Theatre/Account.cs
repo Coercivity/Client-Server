@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-#nullable disable
+﻿#nullable disable
 
 namespace Server
 {
@@ -11,6 +8,7 @@ namespace Server
         public string Nickname { get; set; }
         public string Email { get; set; }
         public string Parol { get; set; }
+
         public virtual Administrator Administrator { get; set; }
         public virtual Spectator Spectator { get; set; }
     }

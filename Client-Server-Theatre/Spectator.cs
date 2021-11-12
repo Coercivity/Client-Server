@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 #nullable disable
 
@@ -11,8 +10,10 @@ namespace Server
         {
             Tickets = new HashSet<Ticket>();
         }
+
         public string FullName { get; set; }
         public int Id { get; set; }
+
         public virtual Account IdNavigation { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
     }

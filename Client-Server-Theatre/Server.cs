@@ -9,15 +9,13 @@ using System.Collections.Generic;
 
 namespace Server
 {
-
     public class Server
     {
-        public static int port = 8005; // порт для приема входящих запросов
-        public static string IP = "127.0.0.1";
+
         static void Main(string[] args)
         {
             // получаем адреса для запуска сокета
-            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(IP), port);
+            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(IMemory.IP), IMemory.port);
 
             // создаем сокет
             Socket listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -54,7 +52,7 @@ namespace Server
                     messageFromClient = clientResponse.Query;
 
                     switch (clientResponse.State)
-                        {
+                    {
                         case State.ReturnTicket:
                             Console.WriteLine(DateTime.Now.ToShortTimeString() + ": " + clientResponse.State);
                             Console.WriteLine(logJson);
@@ -76,7 +74,7 @@ namespace Server
                                 data = Encoding.Unicode.GetBytes(messageToClient);
                                 handler.Send(data);
                             }
-                                break;
+                            break;
                         case State.BuyTicket:
 
                             Console.WriteLine(DateTime.Now.ToShortTimeString() + ": " + clientResponse.State);
@@ -103,7 +101,7 @@ namespace Server
                                     db.SaveChanges();
 
                                     clientResponse.State = State.SuccessfulTicketBuy;
-                                   
+
                                 }
 
                                 messageToClient = JsonSerializer.Serialize<IMemory>(clientResponse);
@@ -187,7 +185,7 @@ namespace Server
                                 data = Encoding.Unicode.GetBytes(messageToClient);
                                 handler.Send(data);
                             }
-                                break;
+                            break;
 
                         case State.InputState:
                             Console.WriteLine(DateTime.Now.ToShortTimeString() + ": " + clientResponse.State);
@@ -202,7 +200,7 @@ namespace Server
                                     StartTime = clientResponse.Play.StartTime,
                                     EndTime = clientResponse.Play.EndTime,
                                     TicketAmount = clientResponse.Play.TicketAmount,
-                                    
+
 
                                 };
                                 db.Plays.Add(play);
@@ -233,10 +231,12 @@ namespace Server
                                 handler.Send(data);
                             }
                             break;
-                            
-                            case State.AuthorizationState:
+
+                        case State.AuthorizationState:
                             switch (clientResponse.Authorization.Status)
                             {
+
+
 
                                 case Status.Authorization:
                                     Console.WriteLine(DateTime.Now.ToShortTimeString() + ": " + clientResponse.Authorization.Status);
@@ -288,7 +288,7 @@ namespace Server
                                         messageToClient = JsonSerializer.Serialize<IMemory>(clientResponse);
                                         data = Encoding.Unicode.GetBytes(messageToClient);
                                         handler.Send(data);
-                                        
+
                                     }
                                     break;
                                 case Status.Registration:
@@ -329,10 +329,10 @@ namespace Server
                                     break;
                             }
                             break;
-                            default:
-                                break;
-                        }
-            
+                        default:
+                            break;
+                    }
+
                     // закрываем сокет
                     handler.Shutdown(SocketShutdown.Both);
                     handler.Close();

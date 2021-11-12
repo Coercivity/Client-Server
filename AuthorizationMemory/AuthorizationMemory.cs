@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Memory
 {
     public class AuthorizationMemory
@@ -11,7 +10,6 @@ namespace Memory
         public string FullName { get; set; }
 
         
-
         public AuthorizationMemory(Status Status, string Email, string Login, string Password, string FullName)
         {
             this.Status = Status;

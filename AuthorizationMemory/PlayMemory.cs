@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Memory
+﻿namespace Memory
 {
     public class PlayMemory
     {
@@ -13,9 +7,7 @@ namespace Memory
         public string StartTime { get; set; }
         public string EndTime { get; set; }
         public int? TicketAmount { get; set; }
-        
         public int Id { get; set; }
-
 
 
         public PlayMemory(string PlayName, string StartDate, string StartTime, string EndTime, int? TicketAmount, int Id)

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 #nullable disable
 
@@ -11,6 +10,7 @@ namespace Server
         {
             Tickets = new HashSet<Ticket>();
         }
+
         public string PlayName { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
