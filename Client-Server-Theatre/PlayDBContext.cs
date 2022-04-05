@@ -25,7 +25,7 @@ namespace Server
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=theatredb.c78czuhpde8z.eu-central-1.rds.amazonaws.com;Database=PlayDB;User Id=admin;Password=admin12345;");
+                optionsBuilder.UseSqlServer("Server=;");
             }
         }
 
